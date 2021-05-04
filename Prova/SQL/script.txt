@@ -1,0 +1,32 @@
+CREATE TABLE PRODUTO(
+ID INT IDENTITY PRIMARY KEY,
+NOME VARCHAR(500),
+PRECO DECIMAL(18,2)
+);
+______________________________________________________
+
+CREATE PROCEDURE INSERIR_PRODUTO
+@NOME VARCHAR(500), @PRECO DECIMAL(18,2)
+AS
+
+INSERT INTO PRODUTO(NOME, PRECO) VALUES (@NOME, @PRECO)
+_________________________________________________________
+
+CREATE PROCEDURE ATUALIZAR_PRODUTO
+@NOME VARCHAR(500), @PRECO DECIMAL(18,2), @ID INT
+AS
+
+UPDATE PRODUTO SET NOME = @NOME, PRECO = @PRECO WHERE ID = @ID
+
+_____________________________________________________________________
+
+CREATE PROCEDURE DELETAR_PRODUTO 
+@ID INT
+AS
+DELETE FROM PRODUTO WHERE ID = @ID
+
+_____________________________________________________________________
+
+CREATE PROCEDURE SELECT_PRODUTO
+AS
+SELECT * FROM PRODUTO

@@ -1,0 +1,49 @@
+﻿@model Prova.Models.ProdutoModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<br /><br /><br />
+
+<h1>Cadastro de produtos</h1>
+<form method="post" action="Home/CadastrarProduto">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Nome</label>
+        <input type="text" name="nome" class="form-control" id="formGroupExampleInput" value="@(Model.produtoASerAlterado != null ?  Model.produtoASerAlterado.nome : "" )" >
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Preco</label>
+        <input type="text" name="preco" class="form-control" id="formGroupExampleInput2" value="@(Model.produtoASerAlterado != null ?  Model.produtoASerAlterado.preco : 0 )" >
+    </div>
+    
+    <input type="hidden" name="id" class="btn btn-primary" value="@(Model.produtoASerAlterado != null ?  Model.produtoASerAlterado.id : 0 )" />
+
+    <input type="submit" class="btn btn-primary" value="Salvar"/>
+
+</form>
+
+<br /><br /><br />
+
+<h1>Tabela de produtos</h1>
+<br />
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.nome)</th>
+        <th>@Html.DisplayNameFor(model => model.preco) </th>
+        <th>Ação</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.listaProduto)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.NOME)</td>
+            <td>@Html.DisplayFor(modelItem => item.PRECO)</td>
+            
+            
+            <td>
+                @Html.ActionLink("Editar", "AtualizarProduto", new { id = item.ID, nome = item.NOME, preco = item.PRECO }) |
+                @Html.ActionLink("Deletar", "DeletarProduto", new { id = item.ID })
+            </td>
+        </tr>
+    }
+</table>
